@@ -2,37 +2,61 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn{
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.isCompleted {
+  text-decoration: line-through;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.hidden{
+  display: none;
+}
+.background-blur{
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
 }
 
-.App-link {
-  color: #61dafb;
+.modal{
+  background-color: white;
+  width:50%;
+  margin:auto auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.list{
+  display:flex;
+  list-style: none;
+  justify-content:space-evenly;
+}
+
+.selected{
+  color:black;
+  text-decoration:none;
+  background-color: red;
+}
+
+a{
+ text-decoration: none !important;
+ color: black
+}
+
+
+.filter-btn {
+  background-color:rgb(184, 184, 184);
+  border-radius: 6px;
+  border: 2px solid rgb(209, 209, 209);
+  cursor: pointer;
+  width: 100px;
+  height:30px;
+}
+
+.filter-btn-active {
+  background-color:rgb(54, 208, 216);
+  border-radius: 6px;
+  border: 2px solid rgb(209, 209, 209);
+  cursor: pointer;
+  width: 100px;
+  height:30px;
 }
