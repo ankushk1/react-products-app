@@ -9,7 +9,6 @@ export const signup = async (user) => {
       url :`${API_URL}/users/signup`,
       data: user
     })
-    console.log(response);
     return response
   } catch(err){
     console.log(err);
@@ -25,11 +24,29 @@ export const signin =async (user) => {
       url :`${API_URL}/users/signin`,
       data: user
     })
-    console.log(response);
-    debugger
     return response
   } catch(err){
     console.log(err);
     return err.response
   }
 } 
+
+
+export const getAllProducts = async () => {
+  try{
+    const response = await axios({
+      method:'GET',
+      url: `${API_URL}/products/getProducts`,
+      headers: {
+        'x-access-token': localStorage.getItem('jwt_token'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+  
+      }
+    })
+    return response
+  } catch(err){
+    console.log(err);
+    return err.response
+  }
+}

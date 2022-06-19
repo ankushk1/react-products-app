@@ -1,23 +1,25 @@
 import React from "react";
+import { useHistory } from "react-router";
 import { signin } from "../../utils/ApiUtils";
 import { error, success } from "../../utils/toast";
 import { useForm } from "../../utils/UseForm";
 
 const Signin = () => {
   const { values, handleChange } = useForm();
-
+  const history = useHistory();
   const handleSubmit = async () => {
     const response = await signin(values);
     if (response.status === 200) {
-      localStorage.setItem('jwt_token', response.data.token)
-      localStorage.setItem('user', JSON.stringify(response.data.user))
+      localStorage.setItem("jwt_token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       success(response.data.message);
+      history.push("/products");
     } else if (response.status === 404) {
       error("Wrong call");
     } else {
       error(response.data.message);
     }
-  }
+  };
 
   return (
     <div>
@@ -25,21 +27,21 @@ const Signin = () => {
         <h1>Sign In</h1>
         <div className="mt-3">
           {" "}
-         <input
-          type="email"
-          value={values.email}
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-        />
-        <br />
-        <input
-          type="password"
-          value={values.password}
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-        />
+          <input
+            type="email"
+            value={values.email}
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
+          <br />
+          <input
+            type="password"
+            value={values.password}
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
         </div>
         <div className="mt-4">
           <button className="btn btn-primary" onClick={() => handleSubmit()}>
