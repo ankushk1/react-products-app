@@ -50,3 +50,24 @@ export const getAllProducts = async () => {
     return err.response
   }
 }
+
+
+export const createProduct = async (product) => {
+  try{
+    const response = await axios({
+      method:'POST',
+      url: `${API_URL}/products/createProduct`,
+      headers: {
+        'x-access-token': localStorage.getItem('jwt_token'),
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+  
+      },
+      data: product
+    })
+    return response
+  } catch(err){
+    console.log(err);
+    return err.response
+  }
+}

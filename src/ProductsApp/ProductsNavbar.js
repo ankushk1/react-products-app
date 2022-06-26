@@ -12,12 +12,6 @@ const ProductsNavbar = (props) => {
     localStorage.clear();
   };
 
-  useEffect(() => {
-    debugger;
-    // setUser(localStorage.getItem("user"))
-  }, [user]);
-  console.log(user);
-
   return (
     <div className="container mt-3">
       <div className="row">
@@ -26,7 +20,7 @@ const ProductsNavbar = (props) => {
         </div>
         {user && (
           <div className="col-6 ">
-            <button className="btn btn-info me-3">Create Product</button>
+            <button className="btn btn-info me-3" onClick={()=> history.push('/product-create')}>Create Product</button>
             <button className="btn btn-success me-3">Cart</button>
             <button className="btn btn-danger" onClick={signout}>
               Sign out

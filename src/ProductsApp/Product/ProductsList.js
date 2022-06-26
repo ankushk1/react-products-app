@@ -9,12 +9,10 @@ import Product from "./Product";
 const ProductsList = () => {
   const [productList, setProductList] = useState([]);
   const history = useHistory();
-  console.log(history);
   const dispach = useDispatch();
   const productsSelector = useSelector(
     (state) => state?.productsData?.products
   );
-  // console.log(productsSelector);
   useEffect(() => {
     dispach(AllProducts());
   }, []);
@@ -30,6 +28,7 @@ const ProductsList = () => {
   // console.log(productList)
   return (
     <div>
+      <ProductsNavbar/>
       <div className="container d-flex justify-content-center flex-wrap mx-5">
         {productList.length > 0 ? (
           productList.map((product, idx) => (

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { signin } from "../../utils/ApiUtils";
 import { error, success } from "../../utils/toast";
 import { useForm } from "../../utils/UseForm";
+import ProductsNavbar from "../ProductsNavbar";
 
 const Signin = () => {
   const { values, handleChange } = useForm();
@@ -23,6 +24,7 @@ const Signin = () => {
 
   return (
     <div>
+      <ProductsNavbar/>
       <div className="d-flex flex-column justify-content-center align-items-center">
         <h1>Sign In</h1>
         <div className="mt-3">
