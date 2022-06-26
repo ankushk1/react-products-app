@@ -11,12 +11,14 @@ import Signup from "./ProductsApp/User/Signup";
 import { ToastContainer } from "react-toastify";
 import Signin from "./ProductsApp/User/Signin";
 import ProductsList from "./ProductsApp/Product/ProductsList";
+import ProductsNavbar from "./ProductsApp/ProductsNavbar";
 
 const Routess = () => {
   return (
     <div className="App">
       <ToastContainer />
       <Router>
+        <ProductsNavbar/>
         <Switch>
           <Route path="/" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
