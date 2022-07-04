@@ -20,11 +20,11 @@ const ProductCreate = () => {
   };
 
   const resetInput = () => { 
-    const currField = {...values}
-    Object.keys(currField).forEach(val =>{
-      currField[val] = ""
+    const inputFields = {...values}
+    Object.keys(inputFields).forEach(key =>{
+      inputFields[key] = ""
     })
-    setValues(currField)
+    setValues(inputFields)
   }
   return (
     <div>

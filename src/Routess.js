@@ -13,6 +13,8 @@ import Signin from "./ProductsApp/User/Signin";
 import ProductsList from "./ProductsApp/Product/ProductsList";
 import ProductsNavbar from "./ProductsApp/ProductsNavbar";
 import ProductCreate from "./ProductsApp/Product/ProductCreate";
+import ProductDetails from "./ProductsApp/Product/ProductDetails";
+import Cart from './ProductsApp/Product/Cart'
 
 const Routess = () => {
   return (
@@ -25,6 +27,8 @@ const Routess = () => {
           <Route path="/signin" exact component={Signin} />
           <Route path="/products" exact component={ProductsList} />
           <Route path="/product-create" exact component={ProductCreate} />
+          <Route path="/product-details" exact component={ProductDetails} />
+          <Route path="/cart" exact component={Cart} />
         </Switch>
       </Router>
     </div>
