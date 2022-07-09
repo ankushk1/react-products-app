@@ -14,6 +14,8 @@ const ProductsList = () => {
   const productsSelector = useSelector(
     (state) => state?.productsData?.products
   );
+  const [sort, setSort] = useState(true);
+  
   useEffect(() => {
     dispach(AllProducts());
   }, []);
@@ -50,27 +52,76 @@ const ProductsList = () => {
     setProductList(filteredData);
   }, [searchText]);
 
+  function compare(a, b) {
+    if (a.price < b.price) {
+      return -1;
+    }
+    if (a.price > b.price) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const onSortHandler = () => {
+    //for string  we can use localeCompare
+    const sortedData = productsSelector?.data?.productsData.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    //for numbers we can use compare method
+    // const sortedData = productsSelector?.data?.productsData.sort(compare)
+
+    if (!sort) {
+      setProductList(sortedData);
+      setSort(!sort);
+    } else {
+      setProductList(sortedData.reverse());
+      setSort(!sort);
+    }
+  };
+  
   return (
     <div>
       <ProductsNavbar />
-      <div className="input-group mb-3 w-25 mt-3 container">
-        <input
-          type="text"
-          className="form-control "
-          placeholder="Search"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <div className="ms-1 input-group-append" onClick={searchHandler}>
-          <span className="input-group-text" id="basic-addon2">
-            <i className="bi bi-search"></i>
-          </span>
+      <div className="container d-flex mt-3 justify-content-around">
+        <div className="input-group mb-3 w-25">
+          <input
+            type="text"
+            className="form-control "
+            placeholder="Search"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <div className="ms-1 input-group-append" onClick={searchHandler}>
+            <span className="input-group-text" id="basic-addon2">
+              <i className="bi bi-search"></i>
+            </span>
+          </div>
+        </div>
+        <div>
+          {sort && (
+            <div
+              className="btn"
+              style={{ fontSize: "24px" }}
+              onClick={() => onSortHandler()}
+            >
+              <i class="bi bi-sort-down"></i>
+            </div>
+          )}
+          {!sort && (
+            <div
+              className="btn"
+              style={{ fontSize: "24px" }}
+              onClick={() => onSortHandler()}
+            >
+              <i class="bi bi-sort-up"></i>
+            </div>
+          )}
         </div>
       </div>
       <div className="container d-flex justify-content-center flex-wrap mx-5">
-        {productList.length > 0 ? (
+        {productList && productList.length > 0 ? (
           productList.map((product, idx) => (
             <Product
               product={product}

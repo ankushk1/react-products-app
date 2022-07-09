@@ -1,20 +1,42 @@
 import React from "react";
 import { useHistory, useLocation } from "react-router";
-import { success } from "../../utils/toast";
+import { deleteProduct } from "../../utils/ApiUtils";
+import { error, success } from "../../utils/toast";
+import { useDispatch, useSelector } from "react-redux";
+import { AllProducts } from "../../actions/productactions";
 
 const ProductDetails = (props) => {
   const location = useLocation();
   const product = location.state.dataFromRoute;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const onProductAdd = () => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) ?? [];
     cartItems.push(product);
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    success("Product added to cart")
+    success("Product added to cart");
     history.push("/cart");
   };
 
+  const onProductUpdate = () =>{
+    history.push('/product-create', {productData:product})
+  }
+
+  const onProductDelete = async () =>{
+    try {
+      const res = await deleteProduct(product._id);
+      if (res.status === 200) {
+        success(res.data.message);
+      } else {
+        error(res.data.message);
+      }
+      dispatch(AllProducts());
+      history.push("/products")
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div>
       <div className="container mt-5">
@@ -50,6 +72,10 @@ const ProductDetails = (props) => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="mt-3">
+          <div className="btn btn-primary me-3" onClick={() => onProductUpdate()}>Update Product</div>
+          <div className="btn  btn-danger" onClick={() => onProductDelete()}>Delete Product</div>
         </div>
       </div>
     </div>
