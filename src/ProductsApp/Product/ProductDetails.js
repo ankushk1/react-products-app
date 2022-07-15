@@ -19,11 +19,12 @@ const ProductDetails = (props) => {
     history.push("/cart");
   };
 
-  const onProductUpdate = () =>{
-    history.push('/product-create', {productData:product})
-  }
+  const user = JSON.parse(localStorage.getItem("user"));
+  const onProductUpdate = () => {
+    history.push("/product-create", { productData: product });
+  };
 
-  const onProductDelete = async () =>{
+  const onProductDelete = async () => {
     try {
       const res = await deleteProduct(product._id);
       if (res.status === 200) {
@@ -32,11 +33,11 @@ const ProductDetails = (props) => {
         error(res.data.message);
       }
       dispatch(AllProducts());
-      history.push("/products")
+      history.push("/products");
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   return (
     <div>
       <div className="container mt-5">
@@ -73,10 +74,20 @@ const ProductDetails = (props) => {
             </div>
           </div>
         </div>
-        <div className="mt-3">
-          <div className="btn btn-primary me-3" onClick={() => onProductUpdate()}>Update Product</div>
-          <div className="btn  btn-danger" onClick={() => onProductDelete()}>Delete Product</div>
-        </div>
+        {console.log(user)}
+        {user?.role === "SA" && (
+          <div className="mt-3">
+            <div
+              className="btn btn-primary me-3"
+              onClick={() => onProductUpdate()}
+            >
+              Update Product
+            </div>
+            <div className="btn  btn-danger" onClick={() => onProductDelete()}>
+              Delete Product
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

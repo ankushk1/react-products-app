@@ -3,10 +3,12 @@ import { signup } from "../../utils/ApiUtils";
 import { useForm } from "../../utils/UseForm";
 import { ToastContainer, toast } from "react-toastify";
 import { error, success } from "../../utils/toast";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ProductsNavbar from "../ProductsNavbar";
 
 const Signup = () => {
+
+  const history = useHistory()
   const { values, handleChange } = useForm();
   const handleSubmit = async () => {
     const response = await signup(values);
@@ -18,6 +20,12 @@ const Signup = () => {
       error(response.data.message);
     }
   };
+
+  useEffect(() => {
+    if(localStorage.getItem("user")){
+      history.push('/products')
+    }
+  },[])
 
   return (
     <div>

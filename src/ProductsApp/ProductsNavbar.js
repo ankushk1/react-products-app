@@ -10,7 +10,7 @@ const ProductsNavbar = (props) => {
   const history = useHistory();
   
   const signout = () => {
-    history.push("/");
+    history.push("/signin");
     localStorage.clear();
   };
 
@@ -22,11 +22,11 @@ const ProductsNavbar = (props) => {
     <div className="container mt-3">
       <div className="row">
         <div className="col-6 d-flex justify-content-start">
-          <h4>Home</h4>
+          <h4>Product Store</h4>
         </div>
         {user && (
           <div className="col-6 ">
-            <button className="btn btn-info me-3" onClick={()=> onCreateProductHandler()}>Create Product</button>
+            {user.role === 'SA' && <button className="btn btn-info me-3" onClick={()=> onCreateProductHandler()}>Create Product</button>}
             <button className="btn btn-success me-3" onClick={()=> history.push('/cart')}>Cart</button>
             <button className="btn btn-danger" onClick={signout}>
               Sign out

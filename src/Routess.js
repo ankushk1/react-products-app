@@ -15,6 +15,7 @@ import ProductsNavbar from "./ProductsApp/ProductsNavbar";
 import ProductCreate from "./ProductsApp/Product/ProductCreate";
 import ProductDetails from "./ProductsApp/Product/ProductDetails";
 import Cart from './ProductsApp/Product/Cart'
+import CustomRoute from "./ProductsApp/CustomRoute";
 
 const Routess = () => {
   return (
@@ -25,10 +26,10 @@ const Routess = () => {
         <Switch>
           <Route path="/" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
-          <Route path="/products" exact component={ProductsList} />
-          <Route path="/product-create" exact component={ProductCreate} />
-          <Route path="/product-details" exact component={ProductDetails} />
-          <Route path="/cart" exact component={Cart} />
+          <CustomRoute path="/products" exact component={ProductsList} />
+          <CustomRoute path="/product-create" exact component={ProductCreate} />
+          <CustomRoute path="/product-details" exact component={ProductDetails} />
+          <CustomRoute path="/cart" exact component={Cart} />
         </Switch>
       </Router>
     </div>
